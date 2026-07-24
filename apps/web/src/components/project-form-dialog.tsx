@@ -108,8 +108,8 @@ export const ProjectFormDialogContent: React.FC<
   const handleAddProject = async (values: IProjectForm) => {
     await createProjectMutation.mutateAsync(values, {
       onSuccess: async (data) => {
-        const aiTaskGen = values.aiTaskGen;
-        const taskGenPrompt = values.taskGenPrompt;
+        const {aiTaskGen} = values;
+        const {taskGenPrompt} = values;
 
         const project = data.at(0);
         if (!project) {
@@ -145,13 +145,13 @@ export const ProjectFormDialogContent: React.FC<
             return;
           }
 
-          const promises = tasks.map((task) => {
-            return createTaskMutation.mutateAsync({
+          const promises = tasks.map((task) => 
+            createTaskMutation.mutateAsync({
               ...task,
               dueDate: task.dueDate ? new Date(task.dueDate) : new Date(),
               projectId,
-            });
-          });
+            })
+          );
 
           await Promise.all(promises);
         }

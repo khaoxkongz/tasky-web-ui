@@ -59,7 +59,7 @@ function RouteComponent() {
   };
 
   return (
-    <React.Fragment>
+    <>
       <TopAppBar title="Inbox" tasksCount={20} />
 
       <Page>
@@ -90,7 +90,7 @@ function RouteComponent() {
           ) : null}
         </PageList>
       </Page>
-    </React.Fragment>
+    </>
   );
 }
 

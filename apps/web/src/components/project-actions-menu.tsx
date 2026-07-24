@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@tasky-web-ui/ui/components/dropdown-menu";
 
-import { Project as IProject, ProjectForm as IProjectForm } from "@/types";
+import type { Project as IProject, ProjectForm as IProjectForm } from "@/types";
 import { orpc } from "@/utils/orpc";
 
 import { ProjectDeleteButton } from "./project-delete-button";
@@ -60,7 +60,7 @@ export const ProjectActionsMenu: React.FC<ProjectActionsMenuProps> = ({
   };
 
   return (
-    <React.Fragment>
+    <>
       <DropdownMenu>
         <DropdownMenuTrigger {...props}>{children}</DropdownMenuTrigger>
 
@@ -111,6 +111,6 @@ export const ProjectActionsMenu: React.FC<ProjectActionsMenuProps> = ({
         setOpen={setOpenDelete}
         project={project}
       />
-    </React.Fragment>
+    </>
   );
 };

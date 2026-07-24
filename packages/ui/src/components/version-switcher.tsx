@@ -1,28 +1,32 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@tasky-web-ui/ui/components/dropdown-menu"
+} from "@tasky-web-ui/ui/components/dropdown-menu";
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@tasky-web-ui/ui/components/sidebar"
-import { GalleryVerticalEndIcon, ChevronsUpDownIcon, CheckIcon } from "lucide-react"
+} from "@tasky-web-ui/ui/components/sidebar";
+import {
+  GalleryVerticalEndIcon,
+  ChevronsUpDownIcon,
+  CheckIcon,
+} from "lucide-react";
 
 export function VersionSwitcher({
   versions,
   defaultVersion,
 }: {
-  versions: string[]
-  defaultVersion: string
+  versions: string[];
+  defaultVersion: string;
 }) {
-  const [selectedVersion, setSelectedVersion] = React.useState(defaultVersion)
+  const [selectedVersion, setSelectedVersion] = React.useState(defaultVersion);
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -35,7 +39,7 @@ export function VersionSwitcher({
               />
             }
           >
-            <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+            <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
               <GalleryVerticalEndIcon className="size-4" />
             </div>
             <div className="flex flex-col gap-0.5 leading-none">
@@ -60,5 +64,5 @@ export function VersionSwitcher({
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
-  )
+  );
 }

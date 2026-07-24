@@ -1,9 +1,6 @@
 ---
 name: clerk-webhooks
-description: Clerk webhooks for real-time events and data syncing. Verify with verifyWebhook
-  from the framework-specific package. Handle user, session, organization, billing, and
-  payment events. Build event-driven features like database sync, notifications, and
-  integrations.
+description: Clerk webhooks for real-time events and data syncing. Verify with verifyWebhook from the framework-specific package. Handle user, session, organization, billing, and payment events. Build event-driven features like database sync, notifications, and integrations.
 allowed-tools: WebFetch
 license: MIT
 metadata:
@@ -73,7 +70,10 @@ export async function POST(req: NextRequest) {
   if (evt.type === "user.updated") {
     const { id, email_addresses, first_name, last_name } = evt.data;
     const email = email_addresses[0]?.email_address;
-    await db.users.update({ where: { clerkId: id }, data: { email, first_name, last_name } });
+    await db.users.update({
+      where: { clerkId: id },
+      data: { email, first_name, last_name },
+    });
   }
 
   if (evt.type === "user.deleted") {
@@ -319,15 +319,15 @@ const {
 
 ## Common Pitfalls
 
-| Symptom                      | Cause                            | Fix                                                               |
-| ---------------------------- | -------------------------------- | ----------------------------------------------------------------- |
-| Verification fails (Next.js) | Wrong import or usage            | Use `@clerk/nextjs/webhooks`, pass `req` directly                 |
-| Verification fails (Express) | Using `express.json()`           | Use `express.raw({ type: 'application/json' })` for webhook route |
-| Route not found (404)        | Wrong path                       | Use `/api/webhooks` or preserve existing path                     |
-| Not authorized (401)         | Route is protected by middleware | Make route public in `clerkMiddleware()`                          |
-| No data in DB                | Async job pending                | Wait/check logs                                                   |
-| Duplicate entries            | Only handling `user.created`     | Also handle `user.updated`                                        |
-| Timeouts                     | Handler too slow                 | Queue async work, return 200 first                                |
+| Symptom | Cause | Fix |
+| --- | --- | --- |
+| Verification fails (Next.js) | Wrong import or usage | Use `@clerk/nextjs/webhooks`, pass `req` directly |
+| Verification fails (Express) | Using `express.json()` | Use `express.raw({ type: 'application/json' })` for webhook route |
+| Route not found (404) | Wrong path | Use `/api/webhooks` or preserve existing path |
+| Not authorized (401) | Route is protected by middleware | Make route public in `clerkMiddleware()` |
+| No data in DB | Async job pending | Wait/check logs |
+| Duplicate entries | Only handling `user.created` | Also handle `user.updated` |
+| Timeouts | Handler too slow | Queue async work, return 200 first |
 
 ## Testing & Deployment
 
@@ -337,8 +337,8 @@ const {
 
 ## References
 
-| Reference                  | Description                                                                              |
-| -------------------------- | ---------------------------------------------------------------------------------------- |
+| Reference | Description |
+| --- | --- |
 | `references/frameworks.md` | Webhook handler examples for Express, Astro, Fastify, Nuxt, React Router, TanStack Start |
 
 ## See Also

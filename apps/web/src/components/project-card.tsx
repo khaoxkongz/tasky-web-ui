@@ -1,4 +1,4 @@
-import { Project } from "@/types";
+import type { Project } from "@/types";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@tasky-web-ui/ui/components/button";
 import { cn } from "@tasky-web-ui/ui/lib/utils";
@@ -14,8 +14,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   className,
   ...props
-}) => {
-  return (
+}) => 
+  (
     <div
       key={project.id}
       className={cn(
@@ -53,5 +53,5 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         className="absolute inset-0 z-10"
       />
     </div>
-  );
-};
+  )
+;

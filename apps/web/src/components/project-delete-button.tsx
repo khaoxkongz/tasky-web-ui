@@ -14,14 +14,14 @@ import {
 } from "@tasky-web-ui/ui/components/alert-dialog";
 import { truncate } from "@tasky-web-ui/ui/lib/utils";
 
-import { Project } from "@/types";
+import type { Project } from "@/types";
 import { orpc } from "@/utils/orpc";
 
-type ProjectDeleteButtonProps = {
+interface ProjectDeleteButtonProps {
   open: boolean;
   setOpen: (open: boolean) => void;
   project: Project;
-};
+}
 
 export const ProjectDeleteButton: React.FC<ProjectDeleteButtonProps> = ({
   open,

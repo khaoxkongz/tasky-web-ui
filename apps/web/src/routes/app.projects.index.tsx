@@ -53,7 +53,7 @@ function RouteComponent() {
   };
 
   return (
-    <React.Fragment>
+    <>
       <TopAppBar title="My Projects" />
 
       <Page>
@@ -114,7 +114,7 @@ function RouteComponent() {
           <ProjectFormDialogContent />
         </ProjectFormDialog>
       </ProjectFormDialogContextProvider>
-    </React.Fragment>
+    </>
   );
 }
 
@@ -142,7 +142,7 @@ export const Route = createFileRoute("/app/projects/")({
     ],
   },
   loaderDeps: ({ search }) => ({
-    search: search,
+    search,
   }),
   component: RouteComponent,
 });

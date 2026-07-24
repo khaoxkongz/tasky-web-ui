@@ -60,7 +60,7 @@ function RouteComponent() {
   };
 
   return (
-    <React.Fragment>
+    <>
       <TopAppBar title="Completed" />
 
       <Page>
@@ -96,7 +96,7 @@ function RouteComponent() {
           ) : null}
         </PageList>
       </Page>
-    </React.Fragment>
+    </>
   );
 }
 

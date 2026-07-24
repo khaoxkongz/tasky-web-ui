@@ -16,7 +16,7 @@ export default function Header() {
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-2"></div>
+        <div className="flex items-center gap-2" />
       </div>
       <hr />
     </div>

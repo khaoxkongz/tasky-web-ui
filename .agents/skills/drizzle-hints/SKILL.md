@@ -30,7 +30,7 @@ The `confirm_data_loss` reply omits the `reason` and `reason_details` keys that 
 Each unresolved item maps to exactly one reply:
 
 | unresolved item type | reply type |
-|----------------------|------------|
+| --- | --- |
 | `'rename_or_create'` | `'rename'` (pick a deleted entity of the same kind to be the `from`) OR `'create'` |
 | `'confirm_data_loss'` | `'confirm_data_loss'` (same `kind` + `entity`) |
 
@@ -39,7 +39,7 @@ Each unresolved item maps to exactly one reply:
 The `kind` literal in the reply must match the literal in the unresolved item exactly. Note that `foreign key` carries a single space — it is the one remaining non-snake_case literal in the union.
 
 | kind | entity-tuple arity | dialect availability |
-|---|---|---|
+| --- | --- | --- |
 | `schema` | `[name]` | postgresql, cockroach, mssql |
 | `role` | `[name]` | postgresql, cockroach |
 | `table` | `[schema, name]` | all |
@@ -63,7 +63,7 @@ The runtime only emits unresolved items for kinds that exist on the target diale
 Confirm-data-loss replies carry `type`, `kind`, and `entity` only — the `reason` and `reason_details` fields the request carries are runtime-only metadata and are dropped from the reply.
 
 | kind | entity-tuple arity | dialect availability |
-|---|---|---|
+| --- | --- | --- |
 | `schema` | `[name]` | postgresql, cockroach, mssql |
 | `table` | `[schema, name]` | all |
 | `view` | `[schema, name]` | postgresql, cockroach (materialized views only) |
@@ -78,7 +78,7 @@ Confirm-data-loss replies carry `type`, `kind`, and `entity` only — the `reaso
 The unresolved item for a `confirm_data_loss` carries a `reason` (and, for `type_change`, a `reason_details`). The reply does not carry the reason — it carries only `type`, `kind`, `entity`.
 
 | reason | applicable kinds | meaning | reason_details |
-|--------|------------------|---------|----------------|
+| --- | --- | --- | --- |
 | `non_empty` | `table`, `column`, `schema`, `view`, `primary_key` | Target entity has ≥1 row; drop will lose data | — |
 | `table_recreate` | `add_not_null` (sqlite / turso only) | Adding the `NOT NULL` column has no in-place path on SQLite, so confirming wipes all rows and recreates the table | — |
 | `type_change` | `column` | Existing column SQL type changes (e.g. mysql / singlestore `ALTER COLUMN`) | `{ from: string, to: string }` |
@@ -112,23 +112,32 @@ drizzle-kit push --output json --config drizzle.config.ts --hints-file ./hints.j
 Pass the reply array as a raw `Hint[]` via the `hints` option to `generate` / `push` (or use `hintsFile` with a file path instead):
 
 ```typescript
-import { generate, push } from 'drizzle-kit';
+import { generate, push } from "drizzle-kit";
 
 const r1 = await generate({
-  dialect: 'postgresql',
-  schema: './src/db/schema.ts',
-  out: './drizzle',
+  dialect: "postgresql",
+  schema: "./src/db/schema.ts",
+  out: "./drizzle",
   hints: [
-    { type: 'rename', kind: 'column', from: ['public', 'users', 'email'], to: ['public', 'users', 'email_v2'] },
+    {
+      type: "rename",
+      kind: "column",
+      from: ["public", "users", "email"],
+      to: ["public", "users", "email_v2"],
+    },
   ],
 });
 
 const r2 = await push({
-  dialect: 'postgresql',
-  schema: './src/db/schema.ts',
+  dialect: "postgresql",
+  schema: "./src/db/schema.ts",
   url: process.env.DATABASE_URL!,
   hints: [
-    { type: 'confirm_data_loss', kind: 'column', entity: ['public', 'users', 'legacy_id'] },
+    {
+      type: "confirm_data_loss",
+      kind: "column",
+      entity: ["public", "users", "legacy_id"],
+    },
   ],
 });
 ```
@@ -143,11 +152,17 @@ A first invocation against a SQLite database returns two ambiguities — one ren
 {
   "status": "missing_hints",
   "unresolved": [
-    { "type": "rename_or_create", "kind": "column",
-      "entity": ["public", "users", "email_v2"] },
-    { "type": "confirm_data_loss", "kind": "add_not_null",
+    {
+      "type": "rename_or_create",
+      "kind": "column",
+      "entity": ["public", "users", "email_v2"]
+    },
+    {
+      "type": "confirm_data_loss",
+      "kind": "add_not_null",
       "entity": ["public", "users", "handle"],
-      "reason": "table_recreate" }
+      "reason": "table_recreate"
+    }
   ]
 }
 ```
@@ -156,11 +171,17 @@ The `table_recreate` reason fires because SQLite has no in-place way to add a `N
 
 ```json
 [
-  { "type": "rename", "kind": "column",
+  {
+    "type": "rename",
+    "kind": "column",
     "from": ["public", "users", "email"],
-    "to":   ["public", "users", "email_v2"] },
-  { "type": "confirm_data_loss", "kind": "add_not_null",
-    "entity": ["public", "users", "handle"] }
+    "to": ["public", "users", "email_v2"]
+  },
+  {
+    "type": "confirm_data_loss",
+    "kind": "add_not_null",
+    "entity": ["public", "users", "handle"]
+  }
 ]
 ```
 
@@ -171,9 +192,12 @@ Re-invoke with this array via `--hints-file ./hints.json` (CLI) or `hints: [...]
 `privilege` is the only kind whose entity tuple has five slots: `[grantor, grantee, schema, table, type]`. Renaming the underlying table renames each privilege grant against it:
 
 ```json
-{ "type": "rename", "kind": "privilege",
+{
+  "type": "rename",
+  "kind": "privilege",
   "from": ["app_owner", "analytics_role", "public", "orders", "SELECT"],
-  "to":   ["app_owner", "analytics_role", "public", "orders_v2", "SELECT"] }
+  "to": ["app_owner", "analytics_role", "public", "orders_v2", "SELECT"]
+}
 ```
 
 ## Schema-namespace placeholder

@@ -14,22 +14,26 @@ const app = express();
 
 // Use express.raw() not express.json() for the webhook route -
 // signature verification requires the raw body bytes.
-app.post("/api/webhooks", express.raw({ type: "application/json" }), async (req, res) => {
-  try {
-    const evt = await verifyWebhook(req);
+app.post(
+  "/api/webhooks",
+  express.raw({ type: "application/json" }),
+  async (req, res) => {
+    try {
+      const evt = await verifyWebhook(req);
 
-    if (evt.type === "user.created") {
-      const { id, email_addresses, first_name, last_name } = evt.data;
-      const email = email_addresses[0]?.email_address;
-      console.log(`New user: ${first_name} ${last_name} (${email})`);
+      if (evt.type === "user.created") {
+        const { id, email_addresses, first_name, last_name } = evt.data;
+        const email = email_addresses[0]?.email_address;
+        console.log(`New user: ${first_name} ${last_name} (${email})`);
+      }
+
+      return res.send("Webhook received");
+    } catch (err) {
+      console.error("Error verifying webhook:", err);
+      return res.status(400).send("Error verifying webhook");
     }
-
-    return res.send("Webhook received");
-  } catch (err) {
-    console.error("Error verifying webhook:", err);
-    return res.status(400).send("Error verifying webhook");
   }
-});
+);
 ```
 
 ## Astro

@@ -1,10 +1,10 @@
-import { Label } from "@tasky-web-ui/ui/components/label"
+import { Label } from "@tasky-web-ui/ui/components/label";
 import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarInput,
-} from "@tasky-web-ui/ui/components/sidebar"
-import { SearchIcon } from "lucide-react"
+} from "@tasky-web-ui/ui/components/sidebar";
+import { SearchIcon } from "lucide-react";
 
 export function SearchForm({ ...props }: React.ComponentProps<"form">) {
   return (
@@ -23,5 +23,5 @@ export function SearchForm({ ...props }: React.ComponentProps<"form">) {
         </SidebarGroupContent>
       </SidebarGroup>
     </form>
-  )
+  );
 }

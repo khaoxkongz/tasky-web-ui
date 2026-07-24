@@ -64,7 +64,7 @@ function RouteComponent() {
 
   if (!project) {
     return (
-      <React.Fragment>
+      <>
         <TopAppBar title="Project Not found" />
 
         <div className="container flex grow flex-col items-center justify-center">
@@ -80,12 +80,12 @@ function RouteComponent() {
             projects!
           </p>
         </div>
-      </React.Fragment>
+      </>
     );
   }
 
   return (
-    <React.Fragment>
+    <>
       <TopAppBar title={project.name} tasksCount={projectTasks.length} />
 
       <Page>
@@ -124,7 +124,7 @@ function RouteComponent() {
           ) : null}
         </PageList>
       </Page>
-    </React.Fragment>
+    </>
   );
 }
 
@@ -153,7 +153,7 @@ export const Route = createFileRoute("/app/projects/$id")({
   }),
   component: RouteComponent,
   errorComponent: () => (
-    <React.Fragment>
+    <>
       <TopAppBar title="Project Not found" />
 
       <div className="container flex grow flex-col items-center justify-center">
@@ -169,10 +169,10 @@ export const Route = createFileRoute("/app/projects/$id")({
           projects!
         </p>
       </div>
-    </React.Fragment>
+    </>
   ),
   notFoundComponent: () => (
-    <React.Fragment>
+    <>
       <TopAppBar title="Project Not found" />
 
       <div className="container flex grow flex-col items-center justify-center">
@@ -188,7 +188,7 @@ export const Route = createFileRoute("/app/projects/$id")({
           projects!
         </p>
       </div>
-    </React.Fragment>
+    </>
   ),
   wrapInSuspense: true,
 });

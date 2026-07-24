@@ -75,7 +75,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   );
 
   return (
-    <React.Fragment>
+    <>
       <Sidebar collapsible="icon" {...props}>
         <SidebarHeader>
           <SidebarMenu>
@@ -293,6 +293,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <ProjectFormDialogContent className="rounded-xl! border-0 p-0" />
         </ProjectFormDialog>
       </ProjectFormDialogContextProvider>
-    </React.Fragment>
+    </>
   );
 }

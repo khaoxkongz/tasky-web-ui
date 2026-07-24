@@ -2,9 +2,7 @@
   "version": "8",
   "dialect": "postgres",
   "id": "25a172a1-f8d5-4030-a2fb-51d368586a59",
-  "prevIds": [
-    "c4c9aab6-e724-4a50-8cc1-434579750e9f"
-  ],
+  "prevIds": ["c4c9aab6-e724-4a50-8cc1-434579750e9f"],
   "ddl": [
     {
       "isRlsEnabled": false,
@@ -189,14 +187,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "project_id"
-      ],
+      "columns": ["project_id"],
       "schemaTo": "public",
       "tableTo": "projects",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "SET NULL",
       "name": "tasks_project_id_projects_id_fkey",
@@ -205,9 +199,7 @@
       "table": "tasks"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "projects_pkey",
       "schema": "public",
@@ -215,9 +207,7 @@
       "entityType": "pks"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "tasks_pkey",
       "schema": "public",

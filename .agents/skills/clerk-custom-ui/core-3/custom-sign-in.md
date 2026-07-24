@@ -10,11 +10,11 @@ import { useSignIn } from "@clerk/nextjs"; // or @clerk/react, @clerk/expo
 const { signIn, errors, fetchStatus } = useSignIn();
 ```
 
-| Property      | Type                   | Description                            |
-| ------------- | ---------------------- | -------------------------------------- |
-| `signIn`      | `SignInFuture`         | Sign-in object with namespaced methods |
-| `errors`      | `Errors<SignInFields>` | Structured error object                |
-| `fetchStatus` | `'idle' \| 'fetching'` | Network request status                 |
+| Property | Type | Description |
+| --- | --- | --- |
+| `signIn` | `SignInFuture` | Sign-in object with namespaced methods |
+| `errors` | `Errors<SignInFields>` | Structured error object |
+| `fetchStatus` | `'idle' \| 'fetching'` | Network request status |
 
 ## Sign-In Methods
 
@@ -61,7 +61,9 @@ const { error } = await signIn.ticket({ ticket: "ticket_abc123" });
 
 ```typescript
 // Send code (emailAddress is optional if a signIn already exists from a prior method call)
-const { error } = await signIn.emailCode.sendCode({ emailAddress: "user@example.com" });
+const { error } = await signIn.emailCode.sendCode({
+  emailAddress: "user@example.com",
+});
 
 // Verify code
 const { error } = await signIn.emailCode.verifyCode({ code: "123456" });
@@ -71,7 +73,9 @@ const { error } = await signIn.emailCode.verifyCode({ code: "123456" });
 
 ```typescript
 // Send code (phoneNumber is optional if a signIn already exists from a prior method call)
-const { error } = await signIn.phoneCode.sendCode({ phoneNumber: "+12015551234" });
+const { error } = await signIn.phoneCode.sendCode({
+  phoneNumber: "+12015551234",
+});
 
 // Verify code
 const { error } = await signIn.phoneCode.verifyCode({ code: "123456" });
@@ -89,15 +93,21 @@ A second factor is required when `signIn.status` is one of:
 const { error } = await signIn.mfa.verifyTOTP({ code: "123456" });
 
 // Backup code
-const { error } = await signIn.mfa.verifyBackupCode({ code: "backup-code-here" });
+const { error } = await signIn.mfa.verifyBackupCode({
+  code: "backup-code-here",
+});
 
 // Email code
 const { error: sendErr } = await signIn.mfa.sendEmailCode();
-const { error: verifyErr } = await signIn.mfa.verifyEmailCode({ code: "123456" });
+const { error: verifyErr } = await signIn.mfa.verifyEmailCode({
+  code: "123456",
+});
 
 // Phone code
 const { error: sendErr } = await signIn.mfa.sendPhoneCode();
-const { error: verifyErr } = await signIn.mfa.verifyPhoneCode({ code: "123456" });
+const { error: verifyErr } = await signIn.mfa.verifyPhoneCode({
+  code: "123456",
+});
 ```
 
 ## Password Reset
@@ -107,7 +117,9 @@ const { error: verifyErr } = await signIn.mfa.verifyPhoneCode({ code: "123456" }
 const { error } = await signIn.resetPasswordEmailCode.sendCode();
 
 // 2. Verify the code
-const { error } = await signIn.resetPasswordEmailCode.verifyCode({ code: "123456" });
+const { error } = await signIn.resetPasswordEmailCode.verifyCode({
+  code: "123456",
+});
 
 // 3. Submit new password
 const { error } = await signIn.resetPasswordEmailCode.submitPassword({
@@ -134,7 +146,9 @@ After successful authentication, call `finalize()` to activate the session:
 ```typescript
 await signIn.finalize({
   navigate: async ({ session, decorateUrl }) => {
-    const destination = session.currentTask ? `/sign-in/tasks/${session.currentTask.key}` : "/";
+    const destination = session.currentTask
+      ? `/sign-in/tasks/${session.currentTask.key}`
+      : "/";
     const url = decorateUrl(destination);
     // decorateUrl may return an absolute URL for Safari ITP
     if (url.startsWith("http")) {
@@ -289,7 +303,9 @@ export default function Page() {
         <div>
           <label htmlFor="email">Enter email address</label>
           <input id="email" name="email" type="email" />
-          {errors.fields.identifier && <p>{errors.fields.identifier.message}</p>}
+          {errors.fields.identifier && (
+            <p>{errors.fields.identifier.message}</p>
+          )}
         </div>
         <div>
           <label htmlFor="password">Enter password</label>

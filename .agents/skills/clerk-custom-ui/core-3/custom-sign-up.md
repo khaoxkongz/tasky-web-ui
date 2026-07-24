@@ -10,11 +10,11 @@ import { useSignUp } from "@clerk/nextjs"; // or @clerk/react, @clerk/expo
 const { signUp, errors, fetchStatus } = useSignUp();
 ```
 
-| Property      | Type                   | Description                            |
-| ------------- | ---------------------- | -------------------------------------- |
-| `signUp`      | `SignUpFuture`         | Sign-up object with namespaced methods |
-| `errors`      | `Errors<SignUpFields>` | Structured error object                |
-| `fetchStatus` | `'idle' \| 'fetching'` | Network request status                 |
+| Property | Type | Description |
+| --- | --- | --- |
+| `signUp` | `SignUpFuture` | Sign-up object with namespaced methods |
+| `errors` | `Errors<SignUpFields>` | Structured error object |
+| `fetchStatus` | `'idle' \| 'fetching'` | Network request status |
 
 ## Sign-Up Methods
 
@@ -69,7 +69,9 @@ After creating a sign-up, verify the user's email or phone:
 const { error } = await signUp.verifications.sendEmailCode();
 
 // Verify the code
-const { error } = await signUp.verifications.verifyEmailCode({ code: "123456" });
+const { error } = await signUp.verifications.verifyEmailCode({
+  code: "123456",
+});
 ```
 
 ### Phone Code
@@ -79,14 +81,18 @@ const { error } = await signUp.verifications.verifyEmailCode({ code: "123456" })
 const { error } = await signUp.verifications.sendPhoneCode();
 
 // Verify the code
-const { error } = await signUp.verifications.verifyPhoneCode({ code: "123456" });
+const { error } = await signUp.verifications.verifyPhoneCode({
+  code: "123456",
+});
 ```
 
 ### Email Link
 
 ```typescript
 // verificationUrl: where the user lands after clicking the email link (relative or absolute)
-const { error } = await signUp.verifications.sendEmailLink({ verificationUrl: "/verify" });
+const { error } = await signUp.verifications.sendEmailLink({
+  verificationUrl: "/verify",
+});
 // User clicks the link in their email to verify
 ```
 
@@ -97,7 +103,9 @@ After successful sign-up and verification, call `finalize()` to activate the ses
 ```typescript
 await signUp.finalize({
   navigate: async ({ session, decorateUrl }) => {
-    const destination = session.currentTask ? `/sign-up/tasks/${session.currentTask.key}` : "/";
+    const destination = session.currentTask
+      ? `/sign-up/tasks/${session.currentTask.key}`
+      : "/";
     const url = decorateUrl(destination);
     // decorateUrl may return an absolute URL for Safari ITP
     if (url.startsWith("http")) {
@@ -222,7 +230,9 @@ export default function SignUpPage() {
           </button>
         </form>
         {/* For email OTP: change sendPhoneCode() to sendEmailCode() */}
-        <button onClick={() => signUp.verifications.sendPhoneCode()}>I need a new code</button>
+        <button onClick={() => signUp.verifications.sendPhoneCode()}>
+          I need a new code
+        </button>
       </>
     );
   }
@@ -235,7 +245,9 @@ export default function SignUpPage() {
         <div>
           <label htmlFor="phoneNumber">Phone number</label>
           <input id="phoneNumber" name="phoneNumber" type="tel" />
-          {errors.fields.phoneNumber && <p>{errors.fields.phoneNumber.message}</p>}
+          {errors.fields.phoneNumber && (
+            <p>{errors.fields.phoneNumber.message}</p>
+          )}
         </div>
         <button type="submit" disabled={fetchStatus === "fetching"}>
           Continue

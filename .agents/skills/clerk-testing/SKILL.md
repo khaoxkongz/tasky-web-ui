@@ -1,7 +1,6 @@
 ---
 name: clerk-testing
-description: E2E testing for Clerk apps. Use with Playwright or Cypress for auth flow
-  tests.
+description: E2E testing for Clerk apps. Use with Playwright or Cypress for auth flow tests.
 allowed-tools: WebFetch
 license: MIT
 metadata:
@@ -14,11 +13,11 @@ compatibility: Requires CLERK_TESTING_TOKEN from Clerk dashboard
 
 ## Decision Tree
 
-| Framework  | Documentation                                                         |
-| ---------- | --------------------------------------------------------------------- |
-| Overview   | https://clerk.com/docs/guides/development/testing/overview            |
+| Framework | Documentation |
+| --- | --- |
+| Overview | https://clerk.com/docs/guides/development/testing/overview |
 | Playwright | https://clerk.com/docs/guides/development/testing/playwright/overview |
-| Cypress    | https://clerk.com/docs/guides/development/testing/cypress/overview    |
+| Cypress | https://clerk.com/docs/guides/development/testing/cypress/overview |
 
 ## Mental Model
 
@@ -52,8 +51,7 @@ Test auth = isolated session state. Each test needs fresh auth context.
 
 ## Framework-Specific
 
-**Playwright**: Use `globalSetup` for auth state
-**Cypress**: Add `addClerkCommands({ Cypress, cy })` to support file
+**Playwright**: Use `globalSetup` for auth state **Cypress**: Add `addClerkCommands({ Cypress, cy })` to support file
 
 ## See Also
 

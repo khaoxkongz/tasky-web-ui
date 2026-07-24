@@ -9,7 +9,7 @@ metadata:
 
 If the `drizzle` skill has not been loaded yet this session, load it first — it carries the staleness check and the MCP-vs-CLI surface-selection rule that govern every drizzle-kit invocation.
 
-Drizzle Kit `generate` / `push` / `check` render results in one of two output modes, selected with `--output`. Output format and interactivity are separate axes: the output mode controls *how* results are rendered; interactivity controls *whether* the CLI may prompt.
+Drizzle Kit `generate` / `push` / `check` render results in one of two output modes, selected with `--output`. Output format and interactivity are separate axes: the output mode controls _how_ results are rendered; interactivity controls _whether_ the CLI may prompt.
 
 - `--output text` (the default) renders human-readable progress and results on stdout, with typed errors on stderr. When a command has unresolved decisions and cannot prompt, it writes the missing-decisions report (below) to stdout and exits with code 2.
 - `--output json` emits a single machine-readable JSON envelope on stdout for every status (including errors), and is always non-interactive.

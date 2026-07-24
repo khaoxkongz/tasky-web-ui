@@ -32,7 +32,7 @@ function RouteComponent() {
     }
   }, [isLoaded, isSignedIn, userId, navigate]);
 
-  return <React.Fragment></React.Fragment>;
+  return <></>;
 }
 
 export const Route = createFileRoute("/auth-sync")({

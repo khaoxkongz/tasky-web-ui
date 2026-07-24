@@ -11,11 +11,11 @@ function RouteComponenet() {
 
   return (
     <div className="relative isolate flex min-h-screen flex-col overflow-hidden">
-      <header></header>
+      <header />
 
-      <main className="grid grow grid-cols-1 items-center pt-36 pb-16"></main>
+      <main className="grid grow grid-cols-1 items-center pt-36 pb-16" />
 
-      <footer></footer>
+      <footer />
 
       <div className="bg-primary/20 absolute top-20 left-0 h-10 w-80 origin-top-left rotate-45 blur-3xl" />
       <div className="bg-primary/20 absolute top-20 right-0 h-10 w-80 origin-top-right rotate-45 blur-3xl" />

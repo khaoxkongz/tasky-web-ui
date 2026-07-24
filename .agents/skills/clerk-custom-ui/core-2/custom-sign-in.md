@@ -75,13 +75,19 @@ await setActive({ session: signIn.createdSessionId });
 
 ```typescript
 // 1. Start reset flow
-await signIn.create({ strategy: "reset_password_email_code", identifier: "user@example.com" });
+await signIn.create({
+  strategy: "reset_password_email_code",
+  identifier: "user@example.com",
+});
 
 // or prepare after initial create:
 await signIn.prepareFirstFactor({ strategy: "reset_password_email_code" });
 
 // 2. Verify reset code
-await signIn.attemptFirstFactor({ strategy: "reset_password_email_code", code: "123456" });
+await signIn.attemptFirstFactor({
+  strategy: "reset_password_email_code",
+  code: "123456",
+});
 
 // 3. Set new password
 await signIn.resetPassword({ password: "newSecurePassword123" });

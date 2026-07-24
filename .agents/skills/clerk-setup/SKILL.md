@@ -1,7 +1,6 @@
 ---
 name: clerk-setup
-description: Add Clerk authentication to any project by following the official quickstart
-  guides.
+description: Add Clerk authentication to any project by following the official quickstart guides.
 license: MIT
 allowed-tools: WebFetch
 compatibility: Requires NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY and CLERK_SECRET_KEY (or framework-specific equivalents like VITE_CLERK_PUBLISHABLE_KEY for Vite-based apps). Keys can be auto-generated via Keyless on first SDK initialization, or pulled from the Clerk Dashboard. Requires Node.js 20.9.0 or higher.
@@ -75,12 +74,12 @@ clerk api --platform POST /v1/platform/applications/<app_id>/rotate_secret_keys 
 
 If the CLI isn't an option (sandboxed environments, docs walkthroughs), here's the manual Dashboard path:
 
-| Step                   | Action                                                             |
-| ---------------------- | ------------------------------------------------------------------ |
-| 1. Detect framework    | Check `package.json` dependencies                                  |
-| 2. Fetch quickstart    | Use WebFetch on the appropriate docs URL                           |
-| 3. Follow instructions | Execute steps; create `proxy.ts` (Next.js <=15: `middleware.ts`)   |
-| 4. Get API keys        | From [dashboard.clerk.com](https://dashboard.clerk.com/~/api-keys) |
+| Step | Action |
+| --- | --- |
+| 1. Detect framework | Check `package.json` dependencies |
+| 2. Fetch quickstart | Use WebFetch on the appropriate docs URL |
+| 3. Follow instructions | Execute steps; create `proxy.ts` (Next.js <=15: `middleware.ts`) |
+| 4. Get API keys | From [dashboard.clerk.com](https://dashboard.clerk.com/~/api-keys) |
 
 > If the project has `components.json` (shadcn/ui), apply the shadcn theme after setup. See `clerk-custom-ui` skill → shadcn Theme.
 
@@ -88,19 +87,19 @@ If the CLI isn't an option (sandboxed environments, docs walkthroughs), here's t
 
 Check `package.json` to identify the framework:
 
-| Dependency              | Framework          | Quickstart URL                                                           |
-| ----------------------- | ------------------ | ------------------------------------------------------------------------ |
-| `next`                  | Next.js            | `https://clerk.com/docs/nextjs/getting-started/quickstart`               |
-| `@remix-run/react`      | Remix (deprecated) | Migrate to React Router v7 — use the React Router quickstart below       |
-| `react-router`          | React Router (v7+) | `https://clerk.com/docs/react-router/getting-started/quickstart`         |
-| `astro`                 | Astro              | `https://clerk.com/docs/astro/getting-started/quickstart`                |
-| `nuxt`                  | Nuxt               | `https://clerk.com/docs/nuxt/getting-started/quickstart`                 |
-| `@tanstack/react-start` | TanStack Start     | `https://clerk.com/docs/tanstack-react-start/getting-started/quickstart` |
-| `react` (no framework)  | React SPA          | `https://clerk.com/docs/react/getting-started/quickstart`                |
-| `vue`                   | Vue                | `https://clerk.com/docs/vue/getting-started/quickstart`                  |
-| `express`               | Express            | `https://clerk.com/docs/expressjs/getting-started/quickstart`            |
-| `fastify`               | Fastify            | `https://clerk.com/docs/fastify/getting-started/quickstart`              |
-| `expo`                  | Expo               | `https://clerk.com/docs/expo/getting-started/quickstart`                 |
+| Dependency | Framework | Quickstart URL |
+| --- | --- | --- |
+| `next` | Next.js | `https://clerk.com/docs/nextjs/getting-started/quickstart` |
+| `@remix-run/react` | Remix (deprecated) | Migrate to React Router v7 — use the React Router quickstart below |
+| `react-router` | React Router (v7+) | `https://clerk.com/docs/react-router/getting-started/quickstart` |
+| `astro` | Astro | `https://clerk.com/docs/astro/getting-started/quickstart` |
+| `nuxt` | Nuxt | `https://clerk.com/docs/nuxt/getting-started/quickstart` |
+| `@tanstack/react-start` | TanStack Start | `https://clerk.com/docs/tanstack-react-start/getting-started/quickstart` |
+| `react` (no framework) | React SPA | `https://clerk.com/docs/react/getting-started/quickstart` |
+| `vue` | Vue | `https://clerk.com/docs/vue/getting-started/quickstart` |
+| `express` | Express | `https://clerk.com/docs/expressjs/getting-started/quickstart` |
+| `fastify` | Fastify | `https://clerk.com/docs/fastify/getting-started/quickstart` |
+| `expo` | Expo | `https://clerk.com/docs/expo/getting-started/quickstart` |
 
 For other platforms:
 
@@ -296,16 +295,7 @@ Also import the shadcn CSS in your global styles:
 
 > **Run `clerk doctor` first.** It checks framework integration, env vars, middleware presence, and SDK install status. Fixes a lot of these in one shot.
 
-| Issue                       | Solution                                                                    |
-| --------------------------- | --------------------------------------------------------------------------- | ------------------- | ----------------------- |
-| Missing `await` on `auth()` | In Next.js 15+, `auth()` is async: `const { userId } = await auth()`        |
-| Exposing `CLERK_SECRET_KEY` | Never use the secret key in client code; only `NEXT_PUBLIC_*` keys are safe |
-| Missing middleware matcher  | Include API routes: `matcher: ['/((?!._\\.._                                | \_next).\*)', '/']` |
-| ClerkProvider placement     | Must be inside `<body>` in root layout (Core 2: could wrap `<html>`)        |
-| Auth routes not public      | Allow `/sign-in`, `/sign-up` in middleware config                           |
-| Landing page requires auth  | To keep "/" public, exclude it: `matcher: ['/((?!._\\.._                    | \_next              | ^/$)._)', '/api/(._)']` |
-| Wrong import path           | Server code uses `@clerk/nextjs/server`, client uses `@clerk/nextjs`        |
-| Wrong package name          | Use `@clerk/react` not `@clerk/clerk-react` (Core 2 naming)                 |
+| Issue | Solution | | --------------------------- | --------------------------------------------------------------------------- | ------------------- | ----------------------- | | Missing `await` on `auth()` | In Next.js 15+, `auth()` is async: `const { userId } = await auth()` | | Exposing `CLERK_SECRET_KEY` | Never use the secret key in client code; only `NEXT_PUBLIC_*` keys are safe | | Missing middleware matcher | Include API routes: `matcher: ['/((?!._\\.._                                | \_next).\*)', '/']` | | ClerkProvider placement | Must be inside `<body>` in root layout (Core 2: could wrap `<html>`) | | Auth routes not public | Allow `/sign-in`, `/sign-up` in middleware config | | Landing page requires auth | To keep "/" public, exclude it: `matcher: ['/((?!._\\.._                    | \_next              | ^/$)._)', '/api/(._)']` | | Wrong import path | Server code uses `@clerk/nextjs/server`, client uses `@clerk/nextjs` | | Wrong package name | Use `@clerk/react` not `@clerk/clerk-react` (Core 2 naming) |
 
 ## See Also
 

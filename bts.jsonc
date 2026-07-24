@@ -17,15 +17,8 @@
   "orm": "drizzle",
   "backend": "hono",
   "runtime": "bun",
-  "frontend": [
-    "tanstack-start"
-  ],
-  "addons": [
-    "oxlint",
-    "skills",
-    "turborepo",
-    "ultracite"
-  ],
+  "frontend": ["tanstack-start"],
+  "addons": ["oxlint", "skills", "turborepo", "ultracite"],
   "examples": [],
   "auth": "clerk",
   "payments": "none",
