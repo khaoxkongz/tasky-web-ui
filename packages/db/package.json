@@ -1,0 +1,37 @@
+{
+  "name": "@tasky-web-ui/db",
+  "type": "module",
+  "scripts": {
+    "db:push": "drizzle-kit push",
+    "db:generate": "drizzle-kit generate",
+    "db:studio": "drizzle-kit studio",
+    "db:migrate": "drizzle-kit migrate",
+    "db:start": "docker compose up -d",
+    "db:watch": "docker compose up",
+    "db:stop": "docker compose stop",
+    "db:down": "docker compose down"
+  },
+  "dependencies": {
+    "@tasky-web-ui/env": "workspace:*",
+    "dotenv": "catalog:",
+    "drizzle-orm": "catalog:",
+    "effect": "^3.21.4",
+    "pg": "^8.17.1",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@tasky-web-ui/config": "workspace:*",
+    "@types/pg": "^8.16.0",
+    "@types/bun": "catalog:",
+    "drizzle-kit": "catalog:",
+    "typescript": "catalog:"
+  },
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  }
+}

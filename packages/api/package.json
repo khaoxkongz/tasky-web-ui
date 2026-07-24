@@ -1,0 +1,36 @@
+{
+  "name": "@tasky-web-ui/api",
+  "type": "module",
+  "scripts": {},
+  "dependencies": {
+    "@clerk/backend": "^3.2.1",
+    "@google/genai": "^2.10.0",
+    "@orpc/client": "catalog:",
+    "@orpc/openapi": "catalog:",
+    "@orpc/server": "catalog:",
+    "@orpc/zod": "catalog:",
+    "@standard-schema/spec": "^1.1.0",
+    "@tasky-web-ui/db": "workspace:*",
+    "@tasky-web-ui/effect": "workspace:*",
+    "@tasky-web-ui/env": "workspace:*",
+    "date-fns": "^4.4.0",
+    "dotenv": "catalog:",
+    "drizzle-orm": "catalog:",
+    "effect": "^3.21.4",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@tasky-web-ui/config": "workspace:*",
+    "hono": "catalog:",
+    "@types/bun": "catalog:",
+    "typescript": "catalog:"
+  },
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  }
+}

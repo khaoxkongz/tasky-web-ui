@@ -1,0 +1,20 @@
+{
+  "name": "@tasky-web-ui/effect",
+  "type": "module",
+  "dependencies": {
+    "effect": "^3.21.4"
+  },
+  "devDependencies": {
+    "@tasky-web-ui/config": "workspace:*",
+    "@types/bun": "catalog:",
+    "typescript": "catalog:"
+  },
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  }
+}
